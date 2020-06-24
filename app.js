@@ -38,15 +38,31 @@ class UI {
         }
     }
 
-    static alerta(mensaje, className) {
-        const div = document.createElement("div");
-        div.className= `text-center alert alert-${className}`;
-        div.appendChild(document.createTextNode(mensaje));
-        const container = document.querySelector(".container");
-        const form = document.querySelector("#book-form");
-        container.insertBefore(div, form);
+
+    // <div class="text-center alert alert-success" id="mensaje">mensaje</div>
+
+    static alerta(mensaje) {
+
+        // New function using a div created in HTML
+
+        let alertax = document.getElementById(`${mensaje}`);
+        alertax.style.display = "block";
+        setTimeout(() => alertax.style.display = "none", 2200)
+
+
+
+        // Original Function
+        
+        //const div = document.createElement("div");
+        //div.className= `text-center alert alert-${className}`;
+        //div.appendChild(document.createTextNode(mensaje));
+        //const container = document.querySelector(".container");
+        //const form = document.querySelector("#book-form");
+        //container.insertBefore(div, form);
+
+
         //desvancer
-        setTimeout(() => document.querySelector(".alert").remove(), 2200);
+        //setTimeout(() => document.querySelector(".alert").remove(), 2200);
     }
 
     static limpiarCampos(){
@@ -119,7 +135,7 @@ document.querySelector("#book-form").addEventListener("submit", (event) => {
 
     //Validación
     if(titulo === "" || autor === "" || isbn === "") {
-        UI.alerta("Completa bien boludo", "danger");
+        UI.alerta("Completa bien boludo");
     }   else {
         //Instanciar Libro
         const libro = new  Libro(titulo, autor, isbn);
@@ -132,7 +148,7 @@ document.querySelector("#book-form").addEventListener("submit", (event) => {
         Guardar.addLibro(libro);
 
         //Alerta Libro Agregado
-        UI.alerta("Buena Kpo", "success");
+        UI.alerta("Buena Kpo");
 
 
         //Limpiar Campos
@@ -155,7 +171,7 @@ document.querySelector("#lista-libros").addEventListener("click", (event) => {
     if (event.target.innerHTML == "Delete") {
         Guardar.eliminarLibro(event.target.parentElement.previousElementSibling.textContent);
         //Alerta Libro Eliminaste
-        UI.alerta("Quien te conoce", "success");
+        UI.alerta("Quien te conoce");
     };
 
 });
